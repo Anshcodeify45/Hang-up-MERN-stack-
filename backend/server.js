@@ -1,9 +1,14 @@
 const express = require("express");
 const {chats} = require("./Data/data")
 const dotenv = require("dotenv");
+const connectMongoDb = require("./config/db");
+
+
+dotenv.config();
+
 
 const app = express();
-dotenv.config();
+connectMongoDb();
 
 app.get('/',(req,res)=>{
     res.send("API is Running");
