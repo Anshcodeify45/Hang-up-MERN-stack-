@@ -2,21 +2,16 @@ const express = require("express");
 const {chats} = require("./Data/data")
 const dotenv = require("dotenv");
 const connectMongoDb = require("./config/db");
-
+const userRoutes = require('./Routes/userRoutes');
 
 dotenv.config();
 
-
-const app = express();
 connectMongoDb();
+const app = express();
 
-app.get('/',(req,res)=>{
-    res.send("API is Running");
-})
+app.use(express.json()) //accepting json
 
-app.get('/api/chat',(req,res) => {
-    res.send(chats)
-})
+app.use('/api/user',userRoutes);
 
 app.get('/api/chat/:id',(req,res)=>{
     const singlechat =  chats.find((c)=>c._id === req.params.id);
