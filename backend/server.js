@@ -3,15 +3,19 @@ const {chats} = require("./Data/data")
 const dotenv = require("dotenv");
 const connectMongoDb = require("./config/db");
 const userRoutes = require('./Routes/userRoutes');
-
+const {notFound ,errorHandeling} =require("./middileware/errorHandeling")
 dotenv.config();
 
 connectMongoDb();
 const app = express();
 
-app.use(express.json()) //accepting json
+app.use(express.json()) //accepting json 
 
 app.use('/api/user',userRoutes);
+
+app.use(notFound);
+
+app.use(errorHandeling);
 
 app.get('/api/chat/:id',(req,res)=>{
     const singlechat =  chats.find((c)=>c._id === req.params.id);
