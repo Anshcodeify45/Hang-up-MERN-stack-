@@ -16,7 +16,6 @@ function Login({onLogin}) {
                const [email, setEmail] = useState();
             const history = useNavigate();
             const { login } = useContext(AuthContext);
-            console.log(login);
     
             const submitHandler = async () => {
               setLoading(true);
@@ -55,7 +54,8 @@ function Login({onLogin}) {
                   isClosable: true,
                   position: "bottom",
                 });
-                localStorage.setItem("userInfo", JSON.stringify(data));
+                const dataUser = localStorage.setItem("userInfo", JSON.stringify(data));
+                console.log("UserData>>>",dataUser)
                 login(email, password);
                 onLogin();
                 setLoading(false);
