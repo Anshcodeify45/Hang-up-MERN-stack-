@@ -7,15 +7,16 @@ import { Stack, TextField ,InputAdornment, IconButton,Button,Typography } from '
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-
-function Login() {
+import { AuthContext } from '../../Context/AuthProvider';
+import { useContext } from 'react';
+function Login({onLogin}) {
         const [showPassword, setShowPassword] = useState(false);
          const [loading, setLoading] = useState(false);
            const [password, setPassword] = useState();
                const [email, setEmail] = useState();
             const history = useNavigate();
-        
+            const { login } = useContext(AuthContext);
+            console.log(login);
     
             const submitHandler = async () => {
               setLoading(true);
@@ -55,6 +56,8 @@ function Login() {
                   position: "bottom",
                 });
                 localStorage.setItem("userInfo", JSON.stringify(data));
+                login(email, password);
+                onLogin();
                 setLoading(false);
                 history("/chats");
               } catch (error) {

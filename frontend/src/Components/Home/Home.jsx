@@ -9,7 +9,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Login from '../Login_Signup/Login';
 import Signup from '../Login_Signup/Signup';
-
+import { AuthProvider } from '../../Context/AuthProvider';
 const HeadingBox = styled('Box')`
    display:flex;
    justify-content:center;
@@ -27,9 +27,9 @@ const LogBOx = styled('Box')`
    border-radius:15px;
    border:2px solid;
    padding:32px;
-`
+` 
 
-function Home() {
+function Home({onLogin}) {
   const [value, setValue] = React.useState('1');
 
   const handleChange = (event, newValue) => {
@@ -52,8 +52,14 @@ function Home() {
               </TabList>
             </Box>
             <Box>
-            <TabPanel value="1"><Signup/></TabPanel>
-            <TabPanel value="2"><Login/></TabPanel>
+            <TabPanel value="1"><Signup setTabValue={setValue} /></TabPanel>
+            
+            <TabPanel value="2">
+            <AuthProvider>
+              <Login onLogin={onLogin}/>             
+              </AuthProvider>
+              </TabPanel>
+            
             </Box>
           </TabContext>
           </Box>

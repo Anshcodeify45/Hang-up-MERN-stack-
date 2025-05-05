@@ -8,7 +8,7 @@ import { useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
-function Signup() {
+function Signup({ setTabValue }) {
     const [showPassword, setShowPassword] = useState(false);
     const [name, setName] = useState();
     const [phone, setPhone] = useState();
@@ -65,7 +65,8 @@ function Signup() {
         });
         localStorage.setItem('userInfo',JSON.stringify(data));
         setLoading(false);
-        history('/chats');
+        setTabValue('2');
+        history('/login');
       } catch (error) {
         toast({
           title:"Error Occured",
@@ -86,10 +87,10 @@ function Signup() {
     <div>
       <Stack spacing={2}>
       <FormControl>
-         <TextField id="outlined-basic" label="Enter Name" variant="outlined" onChange={(e)=> setName(e.target.value)}/>
+         <TextField id="outlined-basic" label="Enter Name" variant="outlined" onChange={(e)=> setName(e.target.value)} style={{color:"black"}}/>
         </FormControl>
         <FormControl>
-         <TextField id="outlined-basic" label="Enter Phone" variant="outlined" onChange={(e)=> setPhone(e.target.value)}/>
+         <TextField id="outlined-basic" label="Enter Phone" variant="outlined" onChange={(e)=> setPhone(e.target.value)} style={{color:"black"}}/>
         </FormControl>
         <FormControl>
             <TextField id="outlined-basic" label="Enter Password" variant="outlined" fullWidth
@@ -103,17 +104,18 @@ function Signup() {
                     </IconButton>
                 </InputAdornment>
                 ),
-            }}/>
+            }} style={{color:"black"}}/>
         </FormControl>
         <FormControl>
          <TextField label="Password"
             variant="outlined"
             type="password"
             onChange={(e)=> setConfirmPassword(e.target.value)}
+            style={{color:"black"}}
             />
         </FormControl>
         <FormControl>
-         <TextField id="outlined-basic" label="Enter Email" variant="outlined"  onChange={(e)=> setEmail(e.target.value)}/>
+         <TextField id="outlined-basic" label="Enter Email" variant="outlined"  onChange={(e)=> setEmail(e.target.value)} style={{color:"black"}}/>
         </FormControl>
         <FormControl>
          <Button variant="contained" onClick={submitHandler} >Sign Up</Button>
