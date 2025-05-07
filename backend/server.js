@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const connectMongoDb = require("./config/db");
 const userRoutes = require('./Routes/userRoutes');
 const chatRoutes = require('./Routes/chatRoutes');
+const messageRoutes = require('./Routes/messageRoutes');
 const {notFound ,errorHandeling} =require("./middileware/errorHandeling")
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(express.json()) //accepting json
 
 app.use('/api/user',userRoutes);
 app.use('/api/chat',chatRoutes);
+app.use('/api/message',messageRoutes);
 app.use(notFound);
 
 app.use(errorHandeling);

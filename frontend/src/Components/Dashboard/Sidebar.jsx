@@ -5,11 +5,19 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { useState ,useEffect } from 'react';
 import axios from 'axios';
+import ChatWindow from './ChatWIndow';
 
-const Sidebar = () => {
+const Sidebar = ({setUserData}) => {
 
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null); // To hold the selected user's info
+
+
+  
+  const handleUserClick = (user) => {
+    setUserData(user); // Set the clicked user
+  };
   
   useEffect(() => {
     const fetchAllUsers = async () => {
@@ -83,7 +91,7 @@ const Sidebar = () => {
           <Box sx={{ maxHeight: 295, overflowY: 'auto', '::-webkit-scrollbar': { display: 'none' } }}>
             <List>
               {users.map((user) => (
-                <ListItem key={user._id}>
+                <ListItem button key={user._id} onClick={() => handleUserClick(user)}>
                   <ListItemAvatar>
                     <Avatar>{user.name.charAt(0).toUpperCase()}</Avatar>
                   </ListItemAvatar>

@@ -51,7 +51,7 @@ function Signup({ setTabValue }) {
           },
         }
         const {data} = await axios.post(
-          "/api/user/signup",
+          "/api/user",
           {name , email , password },
           config
         );
